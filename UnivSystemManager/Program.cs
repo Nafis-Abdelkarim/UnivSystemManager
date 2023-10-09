@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace UnivSystemManager
 {
@@ -12,14 +13,7 @@ namespace UnivSystemManager
             {
                 Console.WriteLine("Choose what you want to do:");
                 Console.WriteLine("1-Insert a student 2-Insert a list of student 3-Show the list of student 4-Search for Student 5-Delete Student");
-                Console.WriteLine("1-Insert a student 2-Insert a list of student 3-Show the list of student");
-=========
-                Console.WriteLine("1-Insert a student 2-Insert a list of student 3-Show the list of student 4-Search for Student");
->>>>>>>>> Temporary merge branch 2
-                Console.WriteLine("1-Insert a student 2-Insert a list of student 3-Show the list of student");
-=========
-                Console.WriteLine("1-Insert a student 2-Insert a list of student 3-Show the list of student 4-Search for Student");
->>>>>>>>> Temporary merge branch 2
+
                 int OpNumber = Convert.ToInt32(Console.ReadLine()); 
                 var context = new StudentDbContext();
                 switch (OpNumber)
@@ -65,10 +59,11 @@ namespace UnivSystemManager
                         Console.WriteLine("Enter the name of student you looking for:");
                         string studentName = Convert.ToString(Console.ReadLine());
                         IQueryable<Student> studentsTable = context.Students;
-                        if(!string.IsNullOrEmpty(studentName) )
+                        if (!string.IsNullOrEmpty(studentName))
                         {
-                            }
-                                }
+                            studentsTable = studentsTable.Where(s => s.FirstName.Contains(studentName) || s.LastName.Contains(studentName));
+
+                            List<Student> results = studentsTable.ToList();
                             if (results.Any())
                             {
                                 Console.WriteLine("The Search Result is :");
@@ -78,7 +73,15 @@ namespace UnivSystemManager
                                 }
                             }
                             else
-            {
+                            {
+                                Console.WriteLine("No matching students found.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please enter a student name.");
+                        }
+                        break;
                     case 5:
                         Console.WriteLine("Enter the ID of the student you want to delete:");
                         int studentID = Convert.ToInt32(Console.ReadLine());    
@@ -90,7 +93,6 @@ namespace UnivSystemManager
                                 context.Students.Remove(studentToDelete);
                                 context.SaveChanges();
                                 Console.WriteLine("Student deleted successfully!");
-                                break;
                             }
                             else
                             {
@@ -102,15 +104,7 @@ namespace UnivSystemManager
                             Console.WriteLine("Invalid input. Please enter a valid student ID.");
                         }
                         break;
-                        }
-                Console.ReadKey();
-                            }
-                        }
-                        else
-                {
-                            Console.WriteLine("Please enter a student name!");
-                        }
-                        break;
+                    Console.ReadKey();
                 }
             }
         }
