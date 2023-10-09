@@ -22,6 +22,7 @@ namespace UnivSystemManager
                         context.Students.Add(student);
                         context.SaveChanges();
                         Console.WriteLine($"The student added to database");
+                        Console.WriteLine("The List of Students Has been added to the database.\n");
                         break;
                     case 2:
                         Console.WriteLine("How to many student you want to insert ?");
@@ -30,9 +31,9 @@ namespace UnivSystemManager
                         {
                             //input
                             Console.WriteLine("Enter the FirstName Of the student");
-                            string firstName = Console.ReadLine();
+                            string? firstName = Convert.ToString(Console.ReadLine());
                             Console.WriteLine("Enter the LastName Of the student");
-                            string lastName = Console.ReadLine();
+                            string? lastName = Convert.ToString(Console.ReadLine());
                             //Create a new object of student
                             var studentList = new Student
                             { FirstName = firstName, LastName = lastName, EnrollementDate = DateTime.Now };
@@ -65,19 +66,21 @@ namespace UnivSystemManager
                                 foreach (var std in results)
                                 {
                                     Console.WriteLine($"Student ID: {std.StudentId}, FirstName : {std.FirstName}, LastName : {std.LastName}");
-                                }
-                            }
+                }
+            }
                             else
-                            {
+            {
                                 Console.WriteLine("No matching students found");
                             }
                         }
                         else
-                        {
+                {
                             Console.WriteLine("Please enter a student name!");
                         }
                         break;
                 }
+
+                Console.ReadKey();
             }
         }
     }

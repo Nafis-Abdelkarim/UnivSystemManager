@@ -19,7 +19,13 @@ namespace UnivSystemManager
             string firstName = Console.ReadLine();
             string lastName = Console.ReadLine();
 
+<<<<<<< HEAD
             return new Student { FirstName = firstName, LastName = lastName, EnrollementDate = DateTime.Now };
+=======
+            return new Student { FirstName = firstName,
+                                 LastName = lastName,
+                                 EnrollementDate = DateTime.Now };
+>>>>>>> cfd40c470ac4b44921ff604b10fb2f3b414fb475
         }
 
     }
