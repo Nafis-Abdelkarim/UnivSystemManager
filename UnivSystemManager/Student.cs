@@ -20,6 +20,7 @@ namespace UnivSystemManager
             string lastName = Console.ReadLine();
 
             return new Student { FirstName = firstName, LastName = lastName, EnrollementDate = DateTime.Now };
+
         }
 
     }
