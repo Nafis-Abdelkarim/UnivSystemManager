@@ -20,10 +20,13 @@ namespace UnivSystemManager
                 {
                     case 1:
                         //Insert a given student to the database
-                        var student = Student.GetStudentInfoFromUser();
+                        Console.WriteLine("Enter the first name and the last name of the student:");
+                        string _firstName = Console.ReadLine();
+                        string _lastName = Console.ReadLine();
+                        var student = Student.GetStudentInfoFromUser(_firstName, _lastName);
                         context.Students.Add(student);
                         context.SaveChanges();
-                        Console.WriteLine($"The student added to database");
+                        Console.WriteLine($"Student added to database");
                         Console.WriteLine("The List of Students Has been added to the database.\n");
                         break;
                     case 2:
